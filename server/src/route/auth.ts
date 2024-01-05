@@ -1,21 +1,16 @@
-import "dotenv/config";
 import Router from "express";
-import Jwt from "jsonwebtoken";
+import jwt from "./jwt.js";
 import routeErrorHandler from "./error.js";
 import User from "../db/user.js";
 
 const router = Router();
-const JWT_SECRET = process.env.JWT_SECRET || "123456";
-const TOKEN_EXPIRE = 86400000;
-
-function signJwt(payload: string | object | Buffer) {
-    return Jwt.sign(payload, JWT_SECRET, {
-        expiresIn: TOKEN_EXPIRE,
-    });
-}
 
 router.use((req, res, next) => {
     res.setHeader("Connection", "close");
+
+    if (req.path === "/auth/ping" && req.method === "POST") {
+        next();
+    }
 
     if (routeErrorHandler.unsupportedMediaType(req, res, "application/json")) {
         next();
@@ -40,8 +35,11 @@ router.post("/auth/login", async (req, res) => {
             return routeErrorHandler.unauthorized(res);
         }
 
-        const token = signJwt(user.toObject());
-        res.cookie("token", token, { maxAge: TOKEN_EXPIRE, httpOnly: true });
+        const token = jwt.signJwt(user.toObject());
+        res.cookie("token", token, {
+            maxAge: jwt.TOKEN_EXPIRE,
+            httpOnly: true,
+        }).end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);
@@ -78,8 +76,31 @@ router.post("/auth/register", async (req, res) => {
             password: password,
             userInfo: userInfo,
         });
-        const token = signJwt(newUser.toObject());
-        res.cookie("token", token, { maxAge: TOKEN_EXPIRE, httpOnly: true });
+        const token = jwt.signJwt(newUser.toObject());
+        res.cookie("token", token, {
+            maxAge: jwt.TOKEN_EXPIRE,
+            httpOnly: true,
+        }).end();
+    } catch (error) {
+        console.error(error);
+        routeErrorHandler.internalError(res);
+    }
+});
+
+/**
+ * Check if token is valid
+ *
+ * 200 - Valid
+ * 401 - Not valid
+ */
+router.post("/auth/ping", async (req, res) => {
+    try {
+        const token = req.cookies["token"];
+        if (!token || !jwt.verifyJwt(token)) {
+            return routeErrorHandler.unauthorized(res);
+        }
+
+        res.status(200).json({ message: "Ok" }).end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);

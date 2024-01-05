@@ -41,3 +41,11 @@ All authentication method start at `/api/auth`. The authentication uses Json Web
 -   Response:
     -   200 - Login successful, a JWT token is set in cookie.
     -   409 - Username existed.
+
+#### Ping `/api/auth/ping`
+
+Check if token is valid. Send token via cookie header.
+
+-   Response:
+    -   200 - Valid
+    -   401 - Not valid
