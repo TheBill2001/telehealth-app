@@ -17,7 +17,7 @@ function unauthorized(res: Response) {
 }
 
 function unsupportedMediaType(req: Request, res: Response, type: string) {
-    if (req.get("Content-Type") != type) {
+    if (!req.is(type)) {
         res.status(415)
             .json({
                 message: `Unsupported media type: expected ${type}, got ${req.get(

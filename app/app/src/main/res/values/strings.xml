@@ -4,4 +4,32 @@
     <string name="password_input">Password</string>
     <string name="login_button">Login</string>
     <string name="register_button">Register</string>
+    <string name="hide_password">Hide password</string>
+    <string name="show_password">Show password</string>
+    <string name="err_wrong_login">Wrong username or password!</string>
+    <string name="err_network">Network error occurred!</string>
+    <string name="register_an_account">Register an account</string>
+    <string name="reenter_password">Re-enter password</string>
+    <string name="your_name">Your name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="email">Email</string>
+    <string name="citizen_id">Citizen ID</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="open_date_picket">Open date picker</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="password_requirement">Password must contain:</string>
+    <string name="password_requirement_1"> - At least one digit.</string>
+    <string name="password_requirement_2"> - At least one lowercase character.</string>
+    <string name="password_requirement_3"> - At least one uppercase character.</string>
+    <string name="password_requirement_4"> - At least one special character (*.!@#$%^&amp;(){}[]:;&lt;>,?/~_+-=|\\).</string>
+    <string name="password_requirement_5"> - At least 8 characters in length, but no more than 32.</string>
+    <string name="password_do_not_match">Passwords do not match.</string>
+    <string name="invalid_phone">Invalid phone number</string>
+    <string name="invalid_email">Invalid email address</string>
+    <string name="invalid_citizen_id">Invalid citizen ID</string>
+    <string name="invalid_b_date">Invalid date of birth</string>
+    <string name="username_requirement">Username must 8 characters in length, but no more than 32.</string>
+    <string name="err_username_existed">Username existed</string>
+    <string name="save_login">Save login</string>
 </resources>
