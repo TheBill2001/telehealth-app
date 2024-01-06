@@ -60,6 +60,7 @@ fun LoginScreen(
             popUpTo(navController.graph.startDestinationId)
             launchSingleTop = true
         }
+        authorizationViewModel.resetUi()
     }
 
     val context = LocalContext.current
@@ -97,7 +98,7 @@ fun LoginScreen(
                 placeholder = { Text(stringResource(R.string.username_input)) },
                 singleLine = true,
                 modifier = modifier.padding(0.dp, 10.dp),
-                enabled = authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading,
+                enabled = authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle,
             )
 
             PasswordTextField(
@@ -125,7 +126,7 @@ fun LoginScreen(
                 modifier = modifier
                     .width(150.dp)
                     .padding(0.dp, 50.dp, 0.dp, 20.dp),
-                enabled = authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading
+                enabled = authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle
             ) {
                 Text(stringResource(R.string.login_button), fontSize = 18.sp)
             }
@@ -138,7 +139,7 @@ fun LoginScreen(
                     }
                 },
                 modifier = modifier.width(150.dp),
-                enabled = authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading
+                enabled = authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle
             ) {
                 Text(stringResource(R.string.register_button), fontSize = 18.sp)
             }
@@ -159,6 +160,7 @@ fun RegisterScreen(
             popUpTo(navController.graph.startDestinationId)
             launchSingleTop = true
         }
+        authorizationViewModel.resetUi()
     }
 
     val context = LocalContext.current
@@ -222,7 +224,7 @@ fun RegisterScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp),
-                enabled = authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading,
+                enabled = authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle,
             )
 
             Text(
@@ -310,7 +312,7 @@ fun RegisterScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp),
-                enabled = authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading,
+                enabled = authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle,
             )
 
             TextField(
@@ -322,7 +324,7 @@ fun RegisterScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp),
-                enabled = authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading,
+                enabled = authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
 
@@ -345,7 +347,7 @@ fun RegisterScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp),
-                enabled = authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading,
+                enabled = authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle,
             )
 
             if (email.isNotEmpty() && !emailOk) {
@@ -367,7 +369,7 @@ fun RegisterScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp),
-                enabled = authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading,
+                enabled = authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
             )
 
@@ -388,7 +390,7 @@ fun RegisterScreen(
                     .padding(0.dp, 10.dp),
                 label = stringResource(R.string.date_of_birth),
                 placeholder = stringResource(R.string.date_of_birth),
-                enabled = authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading,
+                enabled = authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle,
             )
 
             if (!dateOk) {
@@ -415,11 +417,10 @@ fun RegisterScreen(
                     )
                 },
                 modifier = Modifier.align(Alignment.End),
-                enabled = usernameOk && passwordOk && phoneOk && emailOk && citizenIdOk && name.isNotEmpty() && dateOk && authorizationViewModel.authorizationUiState != AuthorizationUiState.Loading
+                enabled = usernameOk && passwordOk && phoneOk && emailOk && citizenIdOk && name.isNotEmpty() && dateOk && authorizationViewModel.authorizationUiState == AuthorizationUiState.Idle
             ) {
                 Text(
                     stringResource(R.string.register_button)
-
                 )
             }
         }

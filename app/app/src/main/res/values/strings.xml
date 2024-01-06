@@ -32,4 +32,10 @@
     <string name="username_requirement">Username must 8 characters in length, but no more than 32.</string>
     <string name="err_username_existed">Username existed</string>
     <string name="save_login">Save login</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="token_invalid">Token expired or invalid, please re-login</string>
+    <string name="user_profile_missing">User profile missing</string>
+    <string name="user_profile">User Profile</string>
+    <string name="logout">Logout</string>
+    <string name="invalid_data">Invalid data</string>
 </resources>

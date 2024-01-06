@@ -10,7 +10,7 @@ All authentication method start at `/api/auth`. The authentication uses Json Web
 
 #### Login `/api/auth/login`
 
--   Request:
+-   Request - POST:
 
 ```
 {username: <login>, password: <password>}
@@ -22,7 +22,7 @@ All authentication method start at `/api/auth`. The authentication uses Json Web
 
 #### Register `/api/auth/register`
 
--   Request:
+-   Request - POST:
 
 ```
 {
@@ -39,13 +39,34 @@ All authentication method start at `/api/auth`. The authentication uses Json Web
 ```
 
 -   Response:
-    -   200 - Login successful, a JWT token is set in cookie.
+    -   200 - Register successful, a JWT token is set in cookie.
     -   409 - Username existed.
+    -   Response 422 : Incorrect data
 
-#### Ping `/api/auth/ping`
+#### Ping - GET `/api/auth/ping`
 
 Check if token is valid. Send token via cookie header.
 
 -   Response:
     -   200 - Valid
     -   401 - Not valid
+
+### Profile - GET `/api/profile`
+
+Get user profile base on token. The response is a JSON of the form:
+
+```
+{
+    id: string,
+    name: string,
+    phone: string,
+    email: string,
+    dateOfBirth: date,
+    citizenID: string
+}
+```
+
+-   Response:
+    -   200 - Valid
+    -   401 - Token invalid
+    -   404 - Missing profile

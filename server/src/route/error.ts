@@ -38,4 +38,25 @@ function conflict(res: Response, reason: string) {
     return res.status(409).json({ message: reason }).end();
 }
 
-export default { internalError, unauthorized, unsupportedMediaType, conflict };
+/**
+ * Respone with Missing - Code 409
+ */
+function missing(res: Response, reason: string) {
+    return res.status(404).json({ message: reason }).end();
+}
+
+/**
+ * Respone with Unprocessable Entity - Code 422
+ */
+function unprocessableEntity(res: Response, reason: string) {
+    return res.status(422).json({ message: reason }).end();
+}
+
+export default {
+    internalError,
+    unauthorized,
+    unsupportedMediaType,
+    conflict,
+    missing,
+    unprocessableEntity,
+};

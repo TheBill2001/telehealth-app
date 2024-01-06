@@ -12,14 +12,21 @@ import androidx.lifecycle.viewModelScope
 import it.app.telehealth.R
 import it.app.telehealth.client.AuthorizationStoreRepository
 import it.app.telehealth.client.TelehealthAPI
-import it.app.telehealth.client.model.LoginRequest
-import it.app.telehealth.client.model.RegisterRequest
-import it.app.telehealth.client.model.RegisterUserInfo
+import it.app.telehealth.client.models.GenericResponse
+import it.app.telehealth.client.models.LoginRequest
+import it.app.telehealth.client.models.RegisterRequest
+import it.app.telehealth.client.models.RegisterUserInfo
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.HttpException
+import retrofit2.Response
 
 sealed interface AuthorizationUiState {
     data object Success : AuthorizationUiState
@@ -37,6 +44,10 @@ class AuthorizationViewModel(
 
     var authorizationUiState: AuthorizationUiState by mutableStateOf(AuthorizationUiState.Idle)
         private set
+
+    fun resetUi() {
+        authorizationUiState = AuthorizationUiState.Idle
+    }
 
     fun relogin(context: Context) {
         viewModelScope.launch {
@@ -82,6 +93,13 @@ class AuthorizationViewModel(
         login(LoginRequest(username, password), save, context)
     }
 
+    fun logout(callback: () -> Unit) {
+        viewModelScope.launch {
+            authorizationStoreRepository.clear()
+            callback()
+        }
+    }
+
     fun register(
         username: String,
         password: String,
@@ -121,6 +139,19 @@ class AuthorizationViewModel(
                         context.resources.getString(R.string.err_username_existed),
                         Toast.LENGTH_LONG
                     ).show()
+                } else if (e.code() == 422) {
+                    try {
+                        val response = Json.decodeFromString<GenericResponse>(e.response()?.errorBody()?.string() ?: "")
+                        Log.i("Authorization", response.message)
+                        Toast.makeText(context, response.message, Toast.LENGTH_LONG).show()
+                    } catch (_ : Exception) {
+                        Log.i("Authorization", context.resources.getString(R.string.invalid_data))
+                        Toast.makeText(
+                            context,
+                            context.resources.getString(R.string.invalid_data),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 } else {
                     Log.i("Authorization", e.toString())
                     Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show()

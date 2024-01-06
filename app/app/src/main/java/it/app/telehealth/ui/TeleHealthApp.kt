@@ -43,7 +43,9 @@ fun TeleHealthApp(
         composable(
             route = Screen.AppScaffold.route,
             content = {
-                AppScaffold()
+                AppScaffold(authorizationViewModel) {
+                    navController.navigate(Screen.LoginScreen.route)
+                }
             }
         )
     }
