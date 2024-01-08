@@ -1,5 +1,15 @@
 # TeleHealth Server
 
+## Environtment variable
+
+-   `PORT`: Server port, default to `3000`.
+-   `DB_URL`: URL to connect to mongodb server.
+-   `DB_USERNAME`: Database username.
+-   `DB_PASSWORD`: Database password.
+-   `ADMIN_USERNAME`: Server default Admin username, default to `admin`.
+-   `ADMIN_PASSWORD`: Server default Admin password, default to `123456`.
+-   `JWT_SECRET`: JSON Web Token secret to authenticate user, default to `123456`.
+
 ## API documentation
 
 The API tries it best to be RESTful. All data are in JSON format.
