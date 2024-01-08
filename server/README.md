@@ -1,5 +1,15 @@
 # TeleHealth Server
 
+## Environtment variable
+
+-   `PORT`: Server port, default to `3000`.
+-   `DB_URL`: URL to connect to mongodb server.
+-   `DB_USERNAME`: Database username.
+-   `DB_PASSWORD`: Database password.
+-   `ADMIN_USERNAME`: Server default Admin username, default to `admin`.
+-   `ADMIN_PASSWORD`: Server default Admin password, default to `123456`.
+-   `JWT_SECRET`: JSON Web Token secret to authenticate user, default to `123456`.
+
 ## API documentation
 
 The API tries it best to be RESTful. All data are in JSON format.
@@ -78,7 +88,9 @@ Get user profile base on token. The response is a JSON of the form:
     -   401 - Token invalid
     -   404 - Missing profile
 
-### Symptom - GET `/api/symptom`
+### Symptom
+
+#### Get user's symptom - GET `/api/symptom`
 
 Get user's symptoms from token:
 
@@ -89,7 +101,7 @@ Get user's symptoms from token:
 
     ```json
     {
-        "user": "<userId>",
+        "userId": "<userId>",
         "symptoms": [
             {
                 "_id": "<string>",
@@ -107,6 +119,10 @@ Get user's symptoms from token:
 
 -   Request:
 
+    -   Query:
+        -   `from`: Filter from date.
+        -   `to`: Filter to date.
+        -   `desc`: Descending order.
     -   `note` is optional.
     -   `severity` is range from 1 to 10.
 
@@ -184,3 +200,102 @@ Get user's symptoms from token:
     ```
 
 #### Delete user symptom - DELETE `/api/symptom/:id`
+
+### COVID Test `/api/covidTest`
+
+Require user token in cookie.
+
+#### Get user's covid test results - GET `/api/covidTest`
+
+-   Response:
+
+    -   `testingFacility` can be empty, denote the testing facility.
+    -   `type`: 0 - self report, 1 - from a testing facility
+
+    ```json
+    {
+        "userId": "<userId>",
+        "symptoms": [
+            {
+                "_id": "<string>",
+                "positive": "<boolean>",
+                "testingFacility": "<string>",
+                "type": "<integer>",
+                "createdAt": "<Date>",
+                "updatedAt": "<Date>"
+            }
+        ]
+    }
+    ```
+
+#### Add user's covid test result - POST `/api/covidTest`
+
+-   Request:
+
+    -   This API end point is for user only. Any test result added through this end point is automatically marked at self report.
+
+    ```json
+    {
+        "positive": "<boolean>"
+    }
+    ```
+
+-   Response:
+    -   `testingFacility` can be empty, denote the testing facility.
+    -   `type`: 0 - self report, 1 - from a testing facility
+    ```json
+    {
+        "_id": "<string>",
+        "positive": "<boolean>",
+        "testingFacility": "<string>",
+        "type": "<integer>",
+        "createdAt": "<Date>",
+        "updatedAt": "<Date>"
+    }
+    ```
+
+#### Get user's covid test result by ID - GET `/api/covidTest/:id`
+
+-   Response:
+    -   `testingFacility` can be empty, denote the testing facility.
+    -   `type`: 0 - self report, 1 - from a testing facility
+    ```json
+    {
+        "_id": "<string>",
+        "positive": "<boolean>",
+        "testingFacility": "<string>",
+        "type": "<integer>",
+        "createdAt": "<Date>",
+        "updatedAt": "<Date>"
+    }
+    ```
+
+#### Update user's covid test result by ID - PUT `/api/covidTest/:id`
+
+-   Request:
+
+    -   This API end point is for user only. Only self report can be update.
+
+    ```json
+    {
+        "positive": "<boolean>"
+    }
+    ```
+
+-   Response:
+    -   `testingFacility` can be empty, denote the testing facility.
+    -   `type`: 0 - self report, 1 - from a testing facility
+    ```json
+    {
+        "_id": "<string>",
+        "positive": "<boolean>",
+        "testingFacility": "<string>",
+        "type": "<integer>",
+        "createdAt": "<Date>",
+        "updatedAt": "<Date>"
+    }
+    ```
+
+#### Delete user's covid test result by ID - DELETE `/api/covidTest/:id`
+
+Can only delete self report entries.

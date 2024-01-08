@@ -57,6 +57,13 @@ function notFound(res: Response, reason?: string) {
     return errorOccurred(res, 422, reason);
 }
 
+/**
+ * Respone with Forbidden - Code 403
+ */
+function forbidden(res: Response, reason?: string) {
+    return errorOccurred(res, 403, reason);
+}
+
 export default {
     internalError,
     unauthorized,
@@ -64,4 +71,5 @@ export default {
     conflict,
     unprocessableEntity,
     notFound,
+    forbidden,
 };
