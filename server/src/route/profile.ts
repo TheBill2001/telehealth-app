@@ -26,10 +26,10 @@ router.get("/", async (req, res) => {
     try {
         const doc = await User.findById(user._id);
 
-        if (!doc) return routeErrorHandler.missing(res, "User is not exist.");
+        if (!doc) return routeErrorHandler.notFound(res, "User is not exist.");
 
         if (!doc.userInfo)
-            return routeErrorHandler.missing(res, "User's profile missing.");
+            return routeErrorHandler.notFound(res, "User's profile missing.");
 
         const userInfo = doc.toObject().userInfo;
         delete userInfo["_id"];

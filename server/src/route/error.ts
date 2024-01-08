@@ -44,13 +44,6 @@ function conflict(res: Response, reason?: string) {
 }
 
 /**
- * Respone with Missing - Code 409
- */
-function missing(res: Response, reason?: string) {
-    return errorOccurred(res, 409, reason);
-}
-
-/**
  * Respone with Unprocessable Entity - Code 422
  */
 function unprocessableEntity(res: Response, reason: string) {
@@ -69,7 +62,6 @@ export default {
     unauthorized,
     unsupportedMediaType,
     conflict,
-    missing,
     unprocessableEntity,
     notFound,
 };
