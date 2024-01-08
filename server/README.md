@@ -117,6 +117,10 @@ Get user's symptoms from token:
 
 -   Request:
 
+    -   Query:
+        -   `from`: Filter from date.
+        -   `to`: Filter to date.
+        -   `desc`: Descending order.
     -   `note` is optional.
     -   `severity` is range from 1 to 10.
 
