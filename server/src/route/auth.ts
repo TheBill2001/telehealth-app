@@ -1,20 +1,23 @@
 import Router from "express";
 import jwt from "./jwt.js";
 import routeErrorHandler from "./error.js";
+import routeUtil from "./util.js";
 import User from "../db/user.js";
 
 const router = Router();
 
+/**
+ * Middleware for this `/api/auth` router
+ */
 router.use((req, res, next) => {
     res.setHeader("Connection", "close");
 
-    if (req.path === "/auth/ping" && req.method === "POST") {
-        next();
-    }
+    // `/api/auth/ping doesn's need JSON body`
+    if (req.path === "/ping") next();
 
-    if (routeErrorHandler.unsupportedMediaType(req, res, "application/json")) {
+    // Verify request has the right body
+    if (routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
         next();
-    }
 });
 
 /**
@@ -22,7 +25,10 @@ router.use((req, res, next) => {
  *
  * Request Format - JSON : {username: <login>, password: <password>}
  */
-router.post("/auth/login", async (req, res) => {
+router.post("/login", async (req, res) => {
+    if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
+        return;
+
     const { username, password } = req.body;
 
     try {
@@ -61,21 +67,31 @@ router.post("/auth/login", async (req, res) => {
  * }
  *
  * Response 409 : Username existed
+ * Response 422 : Incorrect data
  */
-router.post("/auth/register", async (req, res) => {
+router.post("/register", async (req, res) => {
+    if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
+        return;
+
     const { username, password, userInfo } = req.body;
-    // const { phone, email, name, dateOfBirth, citizenID } = userInfo;
+    let newUser;
 
     try {
         if (await User.exists({ username: username })) {
             return routeErrorHandler.conflict(res, "Username existed.");
         }
 
-        const newUser = await User.create({
+        newUser = await User.create({
             username: username,
             password: password,
             userInfo: userInfo,
         });
+    } catch (error) {
+        routeErrorHandler.unprocessableEntity(res, error.message);
+        return;
+    }
+
+    try {
         const token = jwt.signJwt(newUser.toObject());
         res.cookie("token", token, {
             maxAge: jwt.TOKEN_EXPIRE,
@@ -93,18 +109,8 @@ router.post("/auth/register", async (req, res) => {
  * 200 - Valid
  * 401 - Not valid
  */
-router.post("/auth/ping", async (req, res) => {
-    try {
-        const token = req.cookies["token"];
-        if (!token || !jwt.verifyJwt(token)) {
-            return routeErrorHandler.unauthorized(res);
-        }
-
-        res.status(200).json({ message: "Ok" }).end();
-    } catch (error) {
-        console.error(error);
-        routeErrorHandler.internalError(res);
-    }
+router.get("/ping", async (req, res) => {
+    await routeUtil.checkUserIdFromToken(req, res);
 });
 
 export default router;

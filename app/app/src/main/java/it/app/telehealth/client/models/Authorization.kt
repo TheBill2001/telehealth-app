@@ -1,4 +1,4 @@
-package it.app.telehealth.client.model
+package it.app.telehealth.client.models
 
 import kotlinx.serialization.Serializable
 

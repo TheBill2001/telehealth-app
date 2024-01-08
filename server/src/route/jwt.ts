@@ -11,7 +11,7 @@ function signJwt(payload: string | object | Buffer) {
 }
 
 function verifyJwt(token: string) {
-    return Jwt.verify(token, JWT_SECRET);
+    return Jwt.verify(token, JWT_SECRET, { complete: false });
 }
 
 export default {

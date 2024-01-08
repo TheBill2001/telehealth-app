@@ -2,17 +2,14 @@ package it.app.telehealth.client
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import it.app.telehealth.BuildConfig
-import it.app.telehealth.client.model.LoginRequest
-import it.app.telehealth.client.model.RegisterRequest
+import it.app.telehealth.client.services.AuthorizationService
+import it.app.telehealth.client.services.ProfileService
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.JavaNetCookieJar
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
 import java.net.CookieManager
 import java.util.concurrent.TimeUnit
 
@@ -29,20 +26,12 @@ private val retrofit = Retrofit.Builder().client(client)
     .baseUrl(BuildConfig.API_URL)
     .build()
 
-
-interface AuthorizationService {
-    @Headers("Accept: application/json")
-    @POST("auth/login")
-    suspend fun login(@Body request: LoginRequest)
-
-    @Headers("Accept: application/json")
-    @POST("auth/register")
-    suspend fun register(@Body request: RegisterRequest)
-}
-
-
 object TelehealthAPI {
     val authorizationService: AuthorizationService by lazy {
         retrofit.create(AuthorizationService::class.java)
+    }
+
+    val profileService: ProfileService by lazy {
+        retrofit.create(ProfileService::class.java)
     }
 }
