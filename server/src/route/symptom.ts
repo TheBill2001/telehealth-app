@@ -21,10 +21,10 @@ router.use((req, res, next) => {
  * }
  */
 router.get("/", async (req, res) => {
-    const userId = routeUtil.checkUserIdFromToken(req, res);
+    const userId = await routeUtil.checkUserIdFromToken(req, res);
     if (!userId) return;
 
-    const fromQuery = new Date(req.query.from?.toString()) || 0;
+    const fromQuery = new Date(req.query.from?.toString() || 0);
     const toQuery = new Date(req.query.to?.toString() || Date.now());
     const descQuery = req.query.desc === "true" ? true : false;
 
@@ -45,10 +45,12 @@ router.get("/", async (req, res) => {
                     return descQuery ? order * -1 : order;
                 }) || [];
 
-        return res.json({
-            user: userId,
-            symptoms: userSymptoms,
-        });
+        return res
+            .json({
+                user: userId,
+                symptoms: userSymptoms,
+            })
+            .end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);
@@ -63,7 +65,7 @@ router.get("/", async (req, res) => {
  * }
  */
 router.post("/", async (req, res) => {
-    const userId = routeUtil.checkUserIdFromToken(req, res);
+    const userId = await routeUtil.checkUserIdFromToken(req, res);
     if (!userId) return;
 
     const { description, severity, note } = req.body;
@@ -89,7 +91,7 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/:entryId", async (req, res) => {
-    const userId = routeUtil.checkUserIdFromToken(req, res);
+    const userId = await routeUtil.checkUserIdFromToken(req, res);
     if (!userId) return;
 
     try {
@@ -99,6 +101,57 @@ router.get("/:entryId", async (req, res) => {
         });
         return symptoms?.symptoms?.at(0)
             ? res.json(symptoms.symptoms[0]).end()
+            : routeErrorHandler.notFound(res);
+    } catch (error) {
+        console.error(error);
+        routeErrorHandler.internalError(res);
+    }
+});
+
+router.put("/:entryId", async (req, res) => {
+    const userId = await routeUtil.checkUserIdFromToken(req, res);
+    if (!userId) return;
+
+    const { description, severity, note } = req.body;
+
+    try {
+        const symptoms = await Symptoms.findOneAndUpdate(
+            {
+                user: userId,
+                "symptoms._id": req.params.entryId,
+            },
+            {
+                $set: {
+                    "symptoms.$": { description, severity, note },
+                },
+            },
+        );
+        return symptoms?.symptoms?.at(0)
+            ? res.json(symptoms.symptoms[0]).end()
+            : routeErrorHandler.notFound(res);
+    } catch (error) {
+        console.error(error);
+        routeErrorHandler.internalError(res);
+    }
+});
+
+router.delete("/:entryId", async (req, res) => {
+    const userId = await routeUtil.checkUserIdFromToken(req, res);
+    if (!userId) return;
+
+    try {
+        const symptoms = await Symptoms.findOneAndUpdate(
+            {
+                user: userId,
+            },
+            {
+                $pull: {
+                    symptoms: { _id: req.params.entryId },
+                },
+            },
+        );
+        return symptoms?.symptoms?.at(0)
+            ? res.end()
             : routeErrorHandler.notFound(res);
     } catch (error) {
         console.error(error);
