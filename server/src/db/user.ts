@@ -29,7 +29,12 @@ type UserModelType = database.Model<IUser>;
 const userSchema = new database.Schema<IUser, UserModelType>({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    role: { type: Number, required: true, default: UserRole.User },
+    role: {
+        type: Number,
+        required: true,
+        enum: UserRole,
+        default: UserRole.User,
+    },
     userInfo: new database.Schema<IUserInfo>({
         name: { type: String, required: true },
         phone: {
