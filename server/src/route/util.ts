@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import jwt from "./jwt.js";
 import routeErrorHandler from "./error.js";
+import User from "../db/user.js";
 
 const getDecodedToken = (req) => {
     let decodedToken = null;
@@ -22,25 +23,32 @@ const getDecodedToken = (req) => {
     return decodedToken;
 };
 
-const checkCrendital = (req: Request, res: Response) => {
-    try {
-        const token = req.cookies["token"];
-        if (!token || !jwt.verifyJwt(token)) {
-            routeErrorHandler.unauthorized(res);
-            return false;
-        }
+const checkUserIdFromToken = async (
+    req: Request,
+    res: Response,
+): Promise<string> => {
+    const userToken = getDecodedToken(req);
+    if (!userToken) {
+        routeErrorHandler.unauthorized(res);
+        return null;
+    }
 
-        res.status(200).json({ message: "Ok" }).end();
+    try {
+        const user = await User.findById(userToken._id);
+        if (!user) {
+            routeErrorHandler.unauthorized(res);
+            return null;
+        }
+        return user._id.toString();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);
-        return false;
     }
 
-    return true;
+    return null;
 };
 
 export default {
-    checkCrendital,
     getDecodedToken,
+    checkUserIdFromToken,
 };

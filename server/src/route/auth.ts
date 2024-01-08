@@ -110,8 +110,7 @@ router.post("/register", async (req, res) => {
  * 401 - Not valid
  */
 router.get("/ping", async (req, res) => {
-    res.setHeader("Connection", "close");
-    routeUtil.checkCrendital(req, res);
+    routeUtil.checkUserIdFromToken(req, res);
 });
 
 export default router;

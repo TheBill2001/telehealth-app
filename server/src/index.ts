@@ -17,6 +17,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", routers.authRouter);
 app.use("/api/profile", routers.profileRouter);
+app.use("/api/symptom", routers.symptomRouter);
 
 app.listen(PORT, () => {
     return console.log(`Express is listening at http://localhost:${PORT}`);

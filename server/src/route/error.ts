@@ -1,11 +1,16 @@
 import { Request, Response } from "express";
 
+function errorOccurred(res: Response, code: number, reason?: string) {
+    res.status(code);
+    return reason ? res.json({ message: reason }).end() : res.end();
+}
+
 /**
  * Respone with Internal Server Error - Code 500
  * @param res response object
  */
 function internalError(res: Response) {
-    return res.status(500).json({ message: "Internal Server Error" }).end();
+    return errorOccurred(res, 500, "Internal Server Error");
 }
 
 /**
@@ -13,18 +18,18 @@ function internalError(res: Response) {
  * @param res response object
  */
 function unauthorized(res: Response) {
-    return res.status(401).json({ message: "Unauthorized" }).end();
+    return errorOccurred(res, 401, "Unauthorized");
 }
 
 function unsupportedMediaType(req: Request, res: Response, type: string) {
     if (!req.is(type)) {
-        res.status(415)
-            .json({
-                message: `Unsupported media type: expected ${type}, got ${req.get(
-                    "Content-Type",
-                )}`,
-            })
-            .end();
+        errorOccurred(
+            res,
+            415,
+            `Unsupported media type: expected ${type}, got ${req.get(
+                "Content-Type",
+            )}`,
+        );
         return false;
     }
     return true;
@@ -34,22 +39,29 @@ function unsupportedMediaType(req: Request, res: Response, type: string) {
  * Respone with Conflicted - Code 409
  * @param res response object
  */
-function conflict(res: Response, reason: string) {
-    return res.status(409).json({ message: reason }).end();
+function conflict(res: Response, reason?: string) {
+    return errorOccurred(res, 409, reason);
 }
 
 /**
  * Respone with Missing - Code 409
  */
-function missing(res: Response, reason: string) {
-    return res.status(404).json({ message: reason }).end();
+function missing(res: Response, reason?: string) {
+    return errorOccurred(res, 409, reason);
 }
 
 /**
  * Respone with Unprocessable Entity - Code 422
  */
 function unprocessableEntity(res: Response, reason: string) {
-    return res.status(422).json({ message: reason }).end();
+    return errorOccurred(res, 422, reason);
+}
+
+/**
+ * Respone with Not found - Code 404
+ */
+function notFound(res: Response, reason?: string) {
+    return errorOccurred(res, 422, reason);
 }
 
 export default {
@@ -59,4 +71,5 @@ export default {
     conflict,
     missing,
     unprocessableEntity,
+    notFound,
 };
