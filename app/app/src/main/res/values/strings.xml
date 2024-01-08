@@ -38,4 +38,6 @@
     <string name="user_profile">User Profile</string>
     <string name="logout">Logout</string>
     <string name="invalid_data">Invalid data</string>
+    <string name="greeting_string_1">Hi, %s!</string>
+    <string name="greeting_string_2">Good day!</string>
 </resources>

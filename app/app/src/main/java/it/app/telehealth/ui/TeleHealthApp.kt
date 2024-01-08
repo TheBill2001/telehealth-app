@@ -44,7 +44,11 @@ fun TeleHealthApp(
             route = Screen.AppScaffold.route,
             content = {
                 AppScaffold(authorizationViewModel) {
-                    navController.navigate(Screen.LoginScreen.route)
+                    navController.popBackStack()
+                    navController.navigate(Screen.LoginScreen.route) {
+                        popUpTo(navController.graph.startDestinationId)
+                        launchSingleTop = true
+                    }
                 }
             }
         )

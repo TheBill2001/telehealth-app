@@ -49,15 +49,8 @@ fun ProfileScreen(
     modifier: Modifier = Modifier,
     logout: () -> Unit
 ) {
-    val isLoggedInState by authorizationViewModel.isLoggedIn.collectAsState()
     val currentUserProfile by profileViewModel.currentUserProfile.observeAsState()
     val context = LocalContext.current
-
-    LaunchedEffect(Unit) {
-        if (isLoggedInState && currentUserProfile == null) {
-            profileViewModel.fetchCurrentUserProfile(context)
-        }
-    }
 
     Surface(
         modifier = modifier
@@ -154,24 +147,4 @@ fun ProfileScreen(
 @Composable
 fun ProfileScreenPreview() {
     ProfileScreen(viewModel(), viewModel()) {}
-}
-
-/**
- * Return the value as string. Return "Unavailable" if null.
- */
-fun valueOrUnavailable(value: String?, context: Context): String {
-    if (value == null)
-        return context.resources.getString(R.string.unavailable)
-    return value
-}
-
-/**
- * Return the [Instant] value as string. Return "Unavailable" if null.
- */
-fun valueOrUnavailable(value: Instant?, context: Context): String {
-    if (value == null)
-        return context.resources.getString(R.string.unavailable)
-
-    val dateFormat = DateFormat.getDateFormat(context)
-    return dateFormat.format(value.toEpochMilliseconds())
 }

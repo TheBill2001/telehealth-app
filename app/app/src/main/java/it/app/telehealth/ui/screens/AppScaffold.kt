@@ -86,7 +86,7 @@ fun AppScaffold(
             startDestination = NavigationScreen.HomeScreen.route
         ) {
             composable(NavigationScreen.HomeScreen.route) {
-                HomeScreen(navController = navController)
+                HomeScreen(profileViewModel, authorizationViewModel, navController = navController)
             }
             composable(NavigationScreen.ProfileScreen.route) {
                 ProfileScreen(profileViewModel, authorizationViewModel) {
