@@ -15,8 +15,8 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
-app.use("/api", routers.authRouter);
-app.use("/api", routers.profileRouter);
+app.use("/api/auth", routers.authRouter);
+app.use("/api/profile", routers.profileRouter);
 
 app.listen(PORT, () => {
     return console.log(`Express is listening at http://localhost:${PORT}`);

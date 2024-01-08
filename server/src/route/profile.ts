@@ -6,11 +6,18 @@ import User from "../db/user.js";
 const router = Router();
 
 /**
- * Get user profile base on token
+ * Middleware for this `/api/profile` router
  */
-router.get("/profile", async (req, res) => {
+router.use((req, res, next) => {
     res.setHeader("Connection", "close");
 
+    next();
+});
+
+/**
+ * Get user profile base on token
+ */
+router.get("/", async (req, res) => {
     const user = routeUtil.getDecodedToken(req);
     if (!user) {
         return routeErrorHandler.unauthorized(res);

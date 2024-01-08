@@ -7,12 +7,25 @@ import User from "../db/user.js";
 const router = Router();
 
 /**
+ * Middleware for this `/api/auth` router
+ */
+router.use((req, res, next) => {
+    res.setHeader("Connection", "close");
+
+    // `/api/auth/ping doesn's need JSON body`
+    if (req.path === "/ping") next();
+
+    // Verify request has the right body
+    if (routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
+        next();
+});
+
+/**
  * Authentication accepts username and password
  *
  * Request Format - JSON : {username: <login>, password: <password>}
  */
-router.post("/auth/login", async (req, res) => {
-    res.setHeader("Connection", "close");
+router.post("/login", async (req, res) => {
     if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
         return;
 
@@ -56,8 +69,7 @@ router.post("/auth/login", async (req, res) => {
  * Response 409 : Username existed
  * Response 422 : Incorrect data
  */
-router.post("/auth/register", async (req, res) => {
-    res.setHeader("Connection", "close");
+router.post("/register", async (req, res) => {
     if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
         return;
 
@@ -97,7 +109,7 @@ router.post("/auth/register", async (req, res) => {
  * 200 - Valid
  * 401 - Not valid
  */
-router.get("/auth/ping", async (req, res) => {
+router.get("/ping", async (req, res) => {
     res.setHeader("Connection", "close");
     routeUtil.checkCrendital(req, res);
 });
