@@ -6,7 +6,7 @@ export enum CovidTestType {
 }
 
 export interface ICovidTestResult {
-    user: database.Types.ObjectId;
+    userId: database.Types.ObjectId;
     positive: boolean;
     testingFacility?: string;
     type: CovidTestType;
@@ -16,7 +16,7 @@ export interface ICovidTestResult {
 
 const covidTestResultSchema = new database.Schema<ICovidTestResult>(
     {
-        user: {
+        userId: {
             type: database.Schema.Types.ObjectId,
             required: true,
             ref: "User",

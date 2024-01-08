@@ -47,7 +47,7 @@ router.get("/", async (req, res) => {
 
         return res
             .json({
-                user: userId,
+                userId: userId,
                 symptoms: userSymptoms,
             })
             .end();

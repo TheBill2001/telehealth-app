@@ -88,7 +88,9 @@ Get user profile base on token. The response is a JSON of the form:
     -   401 - Token invalid
     -   404 - Missing profile
 
-### Symptom - GET `/api/symptom`
+### Symptom
+
+#### Get user's symptom - GET `/api/symptom`
 
 Get user's symptoms from token:
 
@@ -99,7 +101,7 @@ Get user's symptoms from token:
 
     ```json
     {
-        "user": "<userId>",
+        "userId": "<userId>",
         "symptoms": [
             {
                 "_id": "<string>",
@@ -198,3 +200,102 @@ Get user's symptoms from token:
     ```
 
 #### Delete user symptom - DELETE `/api/symptom/:id`
+
+### COVID Test `/api/covidTest`
+
+Require user token in cookie.
+
+#### Get user's covid test results - GET `/api/covidTest`
+
+-   Response:
+
+    -   `testingFacility` can be empty, denote the testing facility.
+    -   `type`: 0 - self report, 1 - from a testing facility
+
+    ```json
+    {
+        "userId": "<userId>",
+        "symptoms": [
+            {
+                "_id": "<string>",
+                "positive": "<boolean>",
+                "testingFacility": "<string>",
+                "type": "<integer>",
+                "createdAt": "<Date>",
+                "updatedAt": "<Date>"
+            }
+        ]
+    }
+    ```
+
+#### Add user's covid test result - POST `/api/covidTest`
+
+-   Request:
+
+    -   This API end point is for user only. Any test result added through this end point is automatically marked at self report.
+
+    ```json
+    {
+        "positive": "<boolean>"
+    }
+    ```
+
+-   Response:
+    -   `testingFacility` can be empty, denote the testing facility.
+    -   `type`: 0 - self report, 1 - from a testing facility
+    ```json
+    {
+        "_id": "<string>",
+        "positive": "<boolean>",
+        "testingFacility": "<string>",
+        "type": "<integer>",
+        "createdAt": "<Date>",
+        "updatedAt": "<Date>"
+    }
+    ```
+
+#### Get user's covid test result by ID - GET `/api/covidTest/:id`
+
+-   Response:
+    -   `testingFacility` can be empty, denote the testing facility.
+    -   `type`: 0 - self report, 1 - from a testing facility
+    ```json
+    {
+        "_id": "<string>",
+        "positive": "<boolean>",
+        "testingFacility": "<string>",
+        "type": "<integer>",
+        "createdAt": "<Date>",
+        "updatedAt": "<Date>"
+    }
+    ```
+
+#### Update user's covid test result by ID - PUT `/api/covidTest/:id`
+
+-   Request:
+
+    -   This API end point is for user only. Only self report can be update.
+
+    ```json
+    {
+        "positive": "<boolean>"
+    }
+    ```
+
+-   Response:
+    -   `testingFacility` can be empty, denote the testing facility.
+    -   `type`: 0 - self report, 1 - from a testing facility
+    ```json
+    {
+        "_id": "<string>",
+        "positive": "<boolean>",
+        "testingFacility": "<string>",
+        "type": "<integer>",
+        "createdAt": "<Date>",
+        "updatedAt": "<Date>"
+    }
+    ```
+
+#### Delete user's covid test result by ID - DELETE `/api/covidTest/:id`
+
+Can only delete self report entries.
