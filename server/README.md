@@ -1,5 +1,7 @@
 # TeleHealth Server
 
+This is a mock server for the TeleHealth App.
+
 ## Environtment variable
 
 -   `PORT`: Server port, default to `3000`.
@@ -90,9 +92,18 @@ Get user profile base on token. The response is a JSON of the form:
 
 ### Symptom
 
+Require user token in cookie.
+
 #### Get user's symptom - GET `/api/symptom`
 
 Get user's symptoms from token:
+
+-   Request:
+
+    -   Query:
+        -   `from`: Filter from date.
+        -   `to`: Filter to date.
+        -   `desc`: Descending order.
 
 -   Response:
 
@@ -119,10 +130,6 @@ Get user's symptoms from token:
 
 -   Request:
 
-    -   Query:
-        -   `from`: Filter from date.
-        -   `to`: Filter to date.
-        -   `desc`: Descending order.
     -   `note` is optional.
     -   `severity` is range from 1 to 10.
 
@@ -206,6 +213,13 @@ Get user's symptoms from token:
 Require user token in cookie.
 
 #### Get user's covid test results - GET `/api/covidTest`
+
+-   Request:
+
+    -   Query:
+        -   `from`: Filter from date.
+        -   `to`: Filter to date.
+        -   `desc`: Descending order.
 
 -   Response:
 
@@ -299,3 +313,110 @@ Require user token in cookie.
 #### Delete user's covid test result by ID - DELETE `/api/covidTest/:id`
 
 Can only delete self report entries.
+
+### Vaccine `/api/vacine`
+
+Require user token in cookie.
+
+#### Get user's vaccination history - GET `/api/vacine/history`
+
+-   Request:
+
+    -   Query:
+        -   `from`: Filter from date.
+        -   `to`: Filter to date.
+        -   `desc`: Descending order.
+
+-   Response:
+    ```json
+    {
+        "userId": "<string>",
+        "history": [{
+            "_id": "<string>",
+            "name": "<string>",
+            "type": "Booster" | "Vaccine",
+            "facility": "<string>",
+            "date": "<date>",
+        }]
+    }
+    ```
+
+#### Get user's vaccination registration - GET `/api/vacine/registration`
+
+-   Request:
+
+    -   Query:
+        -   `from`: Filter from date.
+        -   `to`: Filter to date.
+        -   `desc`: Descending order.
+
+-   Response:
+
+    ```json
+    {
+        "userId": "<string>",
+        "registration": [{
+            "name": "<string>",
+            "type": "Booster" | "Vaccine",
+            "status": "Pending" | "Canceled" | "Accepted" | "Finished",
+            "facility": "<string>",
+            "date": "<date>",
+            "createdAt": "<date>",
+            "updatedAt": "<date>",
+        }]
+    }
+    ```
+
+#### Register vaccination - POST `/api/vacine/registration`
+
+-   Request:
+
+    ```json
+    {
+        "name": "<string>",
+        "type": "Booster" | "Vaccine",
+    }
+    ```
+
+-   Response:
+    ```json
+    {
+        "name": "<string>",
+        "type": "Booster" | "Vaccine",
+        "status": "Pending" | "Canceled" | "Accepted" | "Finished",
+        "facility": "<string>",
+        "date": "<date>",
+        "createdAt": "<date>",
+        "updatedAt": "<date>",
+    }
+    ```
+
+#### Get vaccination registration info - GET `/api/vacine/registration/:id`
+
+-   Response:
+    ```json
+    {
+        "name": "<string>",
+        "type": "Booster" | "Vaccine",
+        "status": "Pending" | "Canceled" | "Accepted" | "Finished",
+        "facility": "<string>",
+        "date": "<date>",
+        "createdAt": "<date>",
+        "updatedAt": "<date>",
+    }
+    ```
+
+#### Cancel vaccination registration - PUT `/api/vacine/registration/:id/cancel`
+
+-   Response:
+    ```json
+    {
+        "name": "<string>",
+        "type": "Booster" | "Vaccine",
+        "status": "Pending" | "Canceled" | "Accepted" | "Finished",
+        "facility": "<string>",
+        "date": "<date>",
+        "createdAt": "<date>",
+        "updatedAt": "<date>",
+    }
+    ```

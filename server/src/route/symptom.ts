@@ -68,6 +68,9 @@ router.post("/", async (req, res) => {
     const userId = await routeUtil.checkUserIdFromToken(req, res);
     if (!userId) return;
 
+    if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
+        return;
+
     const { description, severity, note } = req.body;
 
     try {
@@ -111,6 +114,9 @@ router.get("/:entryId", async (req, res) => {
 router.put("/:entryId", async (req, res) => {
     const userId = await routeUtil.checkUserIdFromToken(req, res);
     if (!userId) return;
+
+    if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
+        return;
 
     const { description, severity, note } = req.body;
 
