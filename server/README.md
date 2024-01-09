@@ -2,6 +2,20 @@
 
 This is a mock server for the TeleHealth App.
 
+## Setup
+
+The server is written with TypeScript and run on NodeJS. The database uses MongoDB.
+
+1. Install the dependencies.
+    ```bash
+    npm install
+    ```
+2. Setting up the [environment variable](#environtment-variable). The most crucial variable that need to be set are `DB_URL`, `DB_USERNAME`, and `DB_PASSWORD`
+3. Run the server.
+    ```bash
+    npm start
+    ```
+
 ## Environtment variable
 
 -   `PORT`: Server port, default to `3000`.
