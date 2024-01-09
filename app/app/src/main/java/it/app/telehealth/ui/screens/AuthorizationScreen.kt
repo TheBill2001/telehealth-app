@@ -110,11 +110,13 @@ fun LoginScreen(
             )
 
             Row(
-                modifier = modifier.fillMaxWidth().padding(0.dp, 10.dp),
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(0.dp, 10.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                Checkbox(checked = saveLogin, onCheckedChange = {saveLogin = it})
+                Checkbox(checked = saveLogin, onCheckedChange = { saveLogin = it })
                 Text(stringResource(R.string.save_login))
             }
 

@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface ProfileService {
     @GET("profile")
-    suspend fun getCurrentUserProfile() : UserProfile
+    suspend fun getCurrentUserProfile(): UserProfile
 }

@@ -1,28 +1,20 @@
 package it.app.telehealth.ui.screens
 
-import android.content.Context
-import android.text.format.DateFormat
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Logout
+import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -36,11 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import it.app.telehealth.R
-import it.app.telehealth.client.models.UserProfile
 import it.app.telehealth.ui.viewmodels.AuthorizationViewModel
 import it.app.telehealth.ui.viewmodels.ProfileViewModel
-import kotlinx.datetime.Instant
-import java.text.SimpleDateFormat
 
 @Composable
 fun ProfileScreen(
@@ -58,11 +47,11 @@ fun ProfileScreen(
             .imePadding()
     ) {
         Column(
-            modifier = modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             ElevatedCard(
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
                     .padding(20.dp)
             ) {
@@ -72,7 +61,7 @@ fun ProfileScreen(
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(20.dp)
                 )
@@ -82,7 +71,7 @@ fun ProfileScreen(
                     onValueChange = {},
                     readOnly = true,
                     label = { Text(stringResource(R.string.your_name)) },
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(20.dp, 10.dp)
                 )
@@ -92,7 +81,7 @@ fun ProfileScreen(
                     onValueChange = {},
                     readOnly = true,
                     label = { Text(stringResource(R.string.date_of_birth)) },
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(20.dp, 10.dp)
                 )
@@ -102,7 +91,7 @@ fun ProfileScreen(
                     onValueChange = {},
                     readOnly = true,
                     label = { Text(stringResource(R.string.phone_number)) },
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(20.dp, 10.dp)
                 )
@@ -112,7 +101,7 @@ fun ProfileScreen(
                     onValueChange = {},
                     readOnly = true,
                     label = { Text(stringResource(R.string.email)) },
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(20.dp, 10.dp)
                 )
@@ -122,7 +111,7 @@ fun ProfileScreen(
                     onValueChange = {},
                     readOnly = true,
                     label = { Text(stringResource(R.string.citizen_id)) },
-                    modifier = modifier
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(20.dp, 10.dp, 20.dp, 20.dp)
                 )
@@ -134,9 +123,9 @@ fun ProfileScreen(
                         logout()
                     }
                 },
-                modifier = modifier.wrapContentWidth()
+                modifier = Modifier.wrapContentWidth()
             ) {
-                Icon(Icons.Filled.Logout, contentDescription = stringResource(R.string.logout))
+                Icon(Icons.AutoMirrored.Filled.Logout, contentDescription = stringResource(R.string.logout))
                 Text(stringResource(R.string.logout))
             }
         }
