@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.Coronavirus
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Science
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,6 +37,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import it.app.telehealth.R
 import it.app.telehealth.ui.viewmodels.AuthorizationViewModel
+import it.app.telehealth.ui.viewmodels.CovidTestResultViewModel
 import it.app.telehealth.ui.viewmodels.ProfileViewModel
 import it.app.telehealth.ui.viewmodels.SymptomViewModel
 
@@ -60,6 +62,12 @@ sealed class NavigationScreen(
         route = "symptom_edit_screen",
         title = R.string.symptom_edit_screen,
         icon = Icons.Filled.Edit,
+    )
+
+    data object CovidTestResultScreen : NavigationScreen(
+        route = "covid_test_result_screen",
+        title = R.string.covid_test_results_screen,
+        icon = Icons.Default.Science
     )
 
     data object ProfileScreen : NavigationScreen(
@@ -87,6 +95,7 @@ fun AppScaffold(
 
     val symptomViewModel: SymptomViewModel = viewModel()
     val profileViewModel: ProfileViewModel = viewModel()
+    val covidTestResultViewModel: CovidTestResultViewModel = viewModel()
 
     Scaffold(
         topBar = {
@@ -108,8 +117,7 @@ fun AppScaffold(
                     }
                 },
                 actions = {
-                    if (topAppBarActions.actions != null)
-                        topAppBarActions.actions!!.invoke(this)
+                    topAppBarActions.actions?.invoke(this)
                 },
                 colors = TopAppBarColors(
                     MaterialTheme.colorScheme.secondaryContainer,
@@ -160,6 +168,16 @@ fun AppScaffold(
                 }
                 currentScreen = NavigationScreen.SymptomEditScreen
             }
+            composable(NavigationScreen.CovidTestResultScreen.route) {
+                CovidTestResultScreen(
+                    covidTestResultViewModel = covidTestResultViewModel,
+                    modifier = Modifier.padding(innerPadding),
+                ) {
+                    topAppBarActions = it
+                }
+                currentScreen = NavigationScreen.CovidTestResultScreen
+            }
+
             composable(NavigationScreen.ProfileScreen.route) {
                 ProfileScreen(
                     profileViewModel,

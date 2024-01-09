@@ -35,19 +35,9 @@ router.get("/", async (req, res) => {
                 $gte: fromQuery,
                 $lte: toQuery,
             },
-        }).sort(descQuery);
+        }).sort({ createdAt: descQuery });
 
-        const data = symptoms ? symptoms.map((item) => item.toObject()) : [];
-        data.forEach((item) => {
-            delete item.userId;
-        });
-
-        return res
-            .json({
-                userId: userId,
-                symptoms: data,
-            })
-            .end();
+        return res.json(symptoms.map((item) => item.toObject())).end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);

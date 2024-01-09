@@ -5,19 +5,18 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Symptom(
+data class CovidTestResult(
     @SerialName("_id")
     val id: String,
-    var description: String,
-    var severity: Float,
-    var note: String? = null,
+    val userId: String,
+    val positive: Boolean,
+    val testingFacility: String? = null,
+    val type: Int,
     val createdAt: Instant? = null,
     val updatedAt: Instant? = null
 )
 
 @Serializable
-data class SymptomRequest(
-    val description: String,
-    val severity: Float,
-    val note: String? = null,
+data class NewCovidTestResult(
+    val positive: Boolean
 )

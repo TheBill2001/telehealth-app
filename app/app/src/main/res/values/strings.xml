@@ -54,4 +54,14 @@
     <string name="save">Save</string>
     <string name="date">Date</string>
     <string name="description">Description</string>
+    <string name="covid_test_results_screen">Covid test results</string>
+    <string name="facility">Facility: %1$s</string>
+    <string name="positive">Positive: %1$s</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="test_type">Type: %1$s</string>
+    <string name="test_type_self">Self report</string>
+    <string name="test_type_facility">Test at a facility</string>
+    <string name="add_test">Add new self test result</string>
+    <string name="add_test_question">Is the result positive?</string>
 </resources>
