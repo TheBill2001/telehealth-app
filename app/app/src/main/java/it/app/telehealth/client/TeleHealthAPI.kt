@@ -3,6 +3,7 @@ package it.app.telehealth.client
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import it.app.telehealth.BuildConfig
 import it.app.telehealth.client.services.AuthorizationService
+import it.app.telehealth.client.services.CovidTestService
 import it.app.telehealth.client.services.ProfileService
 import it.app.telehealth.client.services.SymptomService
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -40,5 +41,9 @@ object TeleHealthAPI {
 
     val symptomService: SymptomService by lazy {
         retrofit.create(SymptomService::class.java)
+    }
+
+    val covidTestService: CovidTestService by lazy {
+        retrofit.create(CovidTestService::class.java)
     }
 }

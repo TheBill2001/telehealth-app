@@ -26,16 +26,9 @@ router.get("/", async (req, res) => {
                 $gte: fromQuery,
                 $lte: toQuery,
             },
-        }).sort(descQuery);
+        }).sort({ createdAt: descQuery });
 
-        return res
-            .json({
-                userId: userId,
-                tests: tests
-                    .map((item) => item.toObject())
-                    .forEach((item) => delete item.userId),
-            })
-            .end();
+        return res.json(tests.map((item) => item.toObject())).end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);
@@ -58,7 +51,7 @@ router.post("/", async (req, res) => {
             positive: positive,
         });
 
-        return res.json(test.toJSON()).end();
+        return res.json(test.toObject()).end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);
@@ -98,7 +91,7 @@ router.put("/:entryId", async (req, res) => {
         test.positive = positive;
         await test.save();
 
-        return res.json(test).end();
+        return res.json(test.toObject()).end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);

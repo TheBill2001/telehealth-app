@@ -139,7 +139,8 @@ fun HomeScreen(
                 items(
                     listOf(
                         NavigationScreen.SymptomScreen,
-                        NavigationScreen.ProfileScreen
+                        NavigationScreen.CovidTestResultScreen,
+                        NavigationScreen.ProfileScreen,
                     )
                 ) { screen ->
                     ElevatedCard(
@@ -164,7 +165,8 @@ fun HomeScreen(
                                 modifier = Modifier
                                     .align(Alignment.CenterHorizontally)
                                     .padding(0.dp, 10.dp, 0.dp, 0.dp),
-                                fontWeight = FontWeight.Bold
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
                             )
                         }
                     }

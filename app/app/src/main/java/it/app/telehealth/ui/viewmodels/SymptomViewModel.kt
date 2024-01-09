@@ -25,7 +25,7 @@ class SymptomViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val userSymptom = TeleHealthAPI.symptomService.getUserSymptoms()
-                _userSymptoms.value = userSymptom.symptoms
+                _userSymptoms.value = userSymptom
             } catch (e: Exception) {
                 e.printStackTrace()
                 Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show()

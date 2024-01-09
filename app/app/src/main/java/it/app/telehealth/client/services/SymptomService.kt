@@ -2,7 +2,6 @@ package it.app.telehealth.client.services
 
 import it.app.telehealth.client.models.Symptom
 import it.app.telehealth.client.models.SymptomRequest
-import it.app.telehealth.client.models.UserSymptom
 import kotlinx.datetime.Instant
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -19,7 +18,7 @@ interface SymptomService {
         @Query("from") from: Instant? = null,
         @Query("to") to: Instant? = null,
         @Query("desk") desc: Boolean? = null
-    ): UserSymptom
+    ): List<Symptom>
 
     @POST("symptom")
     @Headers("Accept: application/json")

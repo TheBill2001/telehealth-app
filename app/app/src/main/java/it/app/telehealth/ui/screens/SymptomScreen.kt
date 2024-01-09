@@ -89,7 +89,7 @@ fun SymptomScreen(
     ) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 300.dp),
-            modifier = Modifier.padding(10.dp)
+            modifier = Modifier.padding(10.dp).fillMaxSize()
         ) {
             if (userSymptoms != null) {
                 items(userSymptoms!!.size) { index ->
@@ -109,7 +109,7 @@ fun SymptomScreen(
                                 .fillMaxWidth()
                         ) {
                             val color = when (item.severity) {
-                                in (1.0 * Int.MIN_VALUE)..3.0 -> Color.Green
+                                in (1.0 * Int.MIN_VALUE)..4.0 -> Color.Green
                                 in 4.0..7.0 -> Color.Yellow
                                 else -> Color.Red
                             }
