@@ -4,6 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import it.app.telehealth.BuildConfig
 import it.app.telehealth.client.services.AuthorizationService
 import it.app.telehealth.client.services.ProfileService
+import it.app.telehealth.client.services.SymptomService
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.JavaNetCookieJar
@@ -20,18 +21,24 @@ private val client: OkHttpClient = OkHttpClient.Builder()
     .connectTimeout(100, TimeUnit.SECONDS)
     .readTimeout(100, TimeUnit.SECONDS).build()
 
+private val json = Json{ ignoreUnknownKeys = true }
+
 @OptIn(ExperimentalSerializationApi::class)
 private val retrofit = Retrofit.Builder().client(client)
-    .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
+    .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
     .baseUrl(BuildConfig.API_URL)
     .build()
 
-object TelehealthAPI {
+object TeleHealthAPI {
     val authorizationService: AuthorizationService by lazy {
         retrofit.create(AuthorizationService::class.java)
     }
 
     val profileService: ProfileService by lazy {
         retrofit.create(ProfileService::class.java)
+    }
+
+    val symptomService: SymptomService by lazy {
+        retrofit.create(SymptomService::class.java)
     }
 }

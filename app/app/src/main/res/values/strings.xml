@@ -40,4 +40,18 @@
     <string name="invalid_data">Invalid data</string>
     <string name="greeting_string_1">Hi, %s!</string>
     <string name="greeting_string_2">Good day!</string>
+    <string name="home_screen">Home</string>
+    <string name="symptom_screen">Symptom</string>
+    <string name="profile_screen">Profile</string>
+    <string name="symptom_date">Date: %1$s</string>
+    <string name="symptom_description">Description: %1$s</string>
+    <string name="symptom_severity">Severity: %1$.1f</string>
+    <string name="symptom_edit_screen">Edit your symptom</string>
+    <string name="more_actions">More actions</string>
+    <string name="delete">Delete</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="date">Date</string>
+    <string name="description">Description</string>
 </resources>

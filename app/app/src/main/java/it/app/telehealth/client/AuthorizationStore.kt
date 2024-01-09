@@ -47,12 +47,12 @@ class AuthorizationStoreRepository(private val dataStore: DataStore<Preferences>
         )
     }
 
-    suspend fun getUsernameAndPassword() : LoginRequest {
+    suspend fun getUsernameAndPassword(): LoginRequest {
         val store = authorizationStoreFlow.first()
         return LoginRequest(store.username, store.password)
     }
 
-    suspend fun storeUsernameAndPassword(request : LoginRequest) {
+    suspend fun storeUsernameAndPassword(request: LoginRequest) {
         storeUsername(request.username)
         storePassword(request.password)
     }
@@ -61,7 +61,7 @@ class AuthorizationStoreRepository(private val dataStore: DataStore<Preferences>
         dataStore.edit { it.clear() }
     }
 
-    private suspend fun storeUsername(username : String) {
+    private suspend fun storeUsername(username: String) {
         dataStore.edit { preferences -> preferences[PreferencesKeys.USERNAME] = username }
     }
 

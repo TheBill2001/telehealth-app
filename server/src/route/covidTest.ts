@@ -31,7 +31,9 @@ router.get("/", async (req, res) => {
         return res
             .json({
                 userId: userId,
-                tests: tests,
+                tests: tests
+                    .map((item) => item.toObject())
+                    .forEach((item) => delete item.userId),
             })
             .end();
     } catch (error) {
@@ -43,6 +45,9 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
     const userId = await routeUtil.checkUserIdFromToken(req, res);
     if (!userId) return;
+
+    if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
+        return;
 
     const { positive } = req.body;
 
@@ -76,6 +81,9 @@ router.get("/:entryId", async (req, res) => {
 router.put("/:entryId", async (req, res) => {
     const userId = await routeUtil.checkUserIdFromToken(req, res);
     if (!userId) return;
+
+    if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
+        return;
 
     const { positive } = req.body;
 

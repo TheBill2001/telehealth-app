@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import it.app.telehealth.R
-import it.app.telehealth.client.TelehealthAPI
+import it.app.telehealth.client.TeleHealthAPI
 import it.app.telehealth.client.models.UserProfile
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
@@ -21,9 +21,9 @@ class ProfileViewModel : ViewModel() {
     fun fetchCurrentUserProfile(context: Context) {
         viewModelScope.launch {
             try {
-                val userProfile = TelehealthAPI.profileService.getCurrentUserProfile()
+                val userProfile = TeleHealthAPI.profileService.getCurrentUserProfile()
                 _currentUserProfile.value = userProfile
-            } catch (e : HttpException) {
+            } catch (e: HttpException) {
                 if (e.code() == 401) {
                     Log.i("Profile", context.resources.getString(R.string.token_invalid))
                     Toast.makeText(
@@ -42,7 +42,7 @@ class ProfileViewModel : ViewModel() {
                     Log.i("Profile", e.toString())
                     Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show()
                 }
-            } catch (e : Exception) {
+            } catch (e: Exception) {
                 Log.i("Profile", e.toString())
                 Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show()
             }
