@@ -73,7 +73,7 @@ fun SymptomScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Refresh,
-                        contentDescription = stringResource(id = R.string.add)
+                        contentDescription = stringResource(id = R.string.refresh)
                     )
                 }
             }
@@ -89,7 +89,9 @@ fun SymptomScreen(
     ) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 300.dp),
-            modifier = Modifier.padding(10.dp).fillMaxSize()
+            modifier = Modifier
+                .padding(10.dp)
+                .fillMaxSize()
         ) {
             if (userSymptoms != null) {
                 items(userSymptoms!!.size) { index ->

@@ -47,6 +47,7 @@
     <string name="symptom_description">Description: %1$s</string>
     <string name="symptom_severity">Severity: %1$.1f</string>
     <string name="symptom_edit_screen">Edit your symptom</string>
+    <string name="symptom_add_screen">Add symptom</string>
     <string name="more_actions">More actions</string>
     <string name="delete">Delete</string>
     <string name="add">Add</string>
@@ -64,4 +65,18 @@
     <string name="test_type_facility">Test at a facility</string>
     <string name="add_test">Add new self test result</string>
     <string name="add_test_question">Is the result positive?</string>
+    <string name="note">Note</string>
+    <string name="vaccination_history_screen">Vaccination history</string>
+    <string name="refresh">Refresh</string>
+    <string name="vaccine_congrat">Congratulation! You\'re vaccinated.</string>
+    <string name="vaccine_shame">You are not vaccinated!</string>
+    <string name="vaccine_name">Vaccine: %1$s</string>
+    <string name="vaccine_type">Type: %1$s</string>
+    <string name="severity_label">Severity</string>
+    <string name="vaccine_regis_list_screen">Vaccination registrations</string>
+    <string name="vaccine_regis_status">Status: %1$s</string>
+    <string name="vaccine_regis_add_screen">Register for vaccination</string>
+    <string name="vaccine_label">Vaccine</string>
+    <string name="facility_label">Facility</string>
+    <string name="vaccine_type_label">Type</string>
 </resources>

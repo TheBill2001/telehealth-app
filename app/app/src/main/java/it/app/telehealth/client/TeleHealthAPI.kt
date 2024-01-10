@@ -6,6 +6,7 @@ import it.app.telehealth.client.services.AuthorizationService
 import it.app.telehealth.client.services.CovidTestService
 import it.app.telehealth.client.services.ProfileService
 import it.app.telehealth.client.services.SymptomService
+import it.app.telehealth.client.services.VaccinationService
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.JavaNetCookieJar
@@ -22,7 +23,7 @@ private val client: OkHttpClient = OkHttpClient.Builder()
     .connectTimeout(100, TimeUnit.SECONDS)
     .readTimeout(100, TimeUnit.SECONDS).build()
 
-private val json = Json{ ignoreUnknownKeys = true }
+private val json = Json { ignoreUnknownKeys = true }
 
 @OptIn(ExperimentalSerializationApi::class)
 private val retrofit = Retrofit.Builder().client(client)
@@ -45,5 +46,9 @@ object TeleHealthAPI {
 
     val covidTestService: CovidTestService by lazy {
         retrofit.create(CovidTestService::class.java)
+    }
+
+    val vaccinationService: VaccinationService by lazy {
+        retrofit.create(VaccinationService::class.java)
     }
 }

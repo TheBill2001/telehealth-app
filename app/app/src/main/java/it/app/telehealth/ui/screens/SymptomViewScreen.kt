@@ -83,13 +83,6 @@ fun SymptomViewScreen(
         }
     }
 
-    LaunchedEffect(id) {
-        if (id != null)
-            reUpdate()
-        else
-            mode = SymptomViewScreenMode.Edit
-    }
-
     LaunchedEffect(true) {
         onComposing(
             TopAppBarActions {
@@ -161,8 +154,15 @@ fun SymptomViewScreen(
                     )
                 }
             }
-
         )
+
+        if (id != null) {
+            reUpdate()
+            NavigationScreen.SymptomEditScreen.title = R.string.symptom_edit_screen
+        } else {
+            NavigationScreen.SymptomEditScreen.title = R.string.symptom_add_screen
+            mode = SymptomViewScreenMode.Edit
+        }
     }
 
     Surface(
@@ -209,6 +209,11 @@ fun SymptomViewScreen(
             )
 
             Row {
+                Text(
+                    text = stringResource(id = R.string.severity_label), modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                )
+
                 Slider(
                     value = if (mode == SymptomViewScreenMode.View) symptom?.severity
                         ?: 5.0f else severity,
@@ -222,7 +227,7 @@ fun SymptomViewScreen(
                 Text(
                     text = "%.1f".format(if (mode == SymptomViewScreenMode.View) symptom?.severity else severity),
                     modifier = Modifier
-                        .width(50.dp)
+                        .width(40.dp)
                         .align(Alignment.CenterVertically)
                 )
             }
@@ -233,6 +238,7 @@ fun SymptomViewScreen(
                 onValueChange = { note = it },
                 enabled = state == SymptomViewScreenState.Idle,
                 readOnly = mode == SymptomViewScreenMode.View,
+                label = { Text(stringResource(id = R.string.note)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp, 0.dp, 10.dp),

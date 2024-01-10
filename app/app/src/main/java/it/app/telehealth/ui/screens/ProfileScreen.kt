@@ -125,7 +125,10 @@ fun ProfileScreen(
                 },
                 modifier = Modifier.wrapContentWidth()
             ) {
-                Icon(Icons.AutoMirrored.Filled.Logout, contentDescription = stringResource(R.string.logout))
+                Icon(
+                    Icons.AutoMirrored.Filled.Logout,
+                    contentDescription = stringResource(R.string.logout)
+                )
                 Text(stringResource(R.string.logout))
             }
         }

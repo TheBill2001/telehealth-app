@@ -4,7 +4,7 @@ import routeUtil from "./util.js";
 import {
     VaccineHistory,
     VaccineRegistraction,
-    VaccineRegistractionStatus,
+    VaccineRegistrationStatus,
 } from "../db/vaccine.js";
 
 const router = Router();
@@ -30,16 +30,9 @@ router.get("/history", async (req, res) => {
                 $gte: fromQuery,
                 $lte: toQuery,
             },
-        }).sort(descQuery);
+        }).sort({ date: descQuery });
 
-        return res
-            .json({
-                userId: userId,
-                history: history
-                    .map((item) => item.toObject())
-                    .forEach((item) => delete item.userId),
-            })
-            .end();
+        return res.json(history.map((item) => item.toObject())).end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);
@@ -57,20 +50,13 @@ router.get("/registration", async (req, res) => {
     try {
         const registration = await VaccineRegistraction.find({
             userId,
-            date: {
+            createdAt: {
                 $gte: fromQuery,
                 $lte: toQuery,
             },
-        }).sort(descQuery);
+        }).sort({ createdAt: descQuery });
 
-        return res
-            .json({
-                userId: userId,
-                registration: registration
-                    .map((item) => item.toObject())
-                    .forEach((item) => delete item.userId),
-            })
-            .end();
+        return res.json(registration.map((item) => item.toObject())).end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);
@@ -84,16 +70,17 @@ router.post("/registration", async (req, res) => {
     if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
         return;
 
-    const { name, type } = req.body;
+    const { name, type, facility } = req.body;
 
     try {
         const registration = await VaccineRegistraction.create({
             userId,
             name,
             type,
+            facility,
         });
 
-        return res.json(registration.toJSON()).end();
+        return res.json(registration.toObject()).end();
     } catch (error) {
         console.error(error);
         routeErrorHandler.internalError(res);
@@ -111,7 +98,7 @@ router.get("/registration/:id", async (req, res) => {
         });
 
         return registration
-            ? res.json(registration.toJSON()).end()
+            ? res.json(registration.toObject()).end()
             : routeErrorHandler.notFound(res);
     } catch (error) {
         console.error(error);
@@ -130,12 +117,12 @@ router.put("/registration/:id/cancel", async (req, res) => {
                 _id: req.params.id,
             },
             {
-                status: VaccineRegistractionStatus.Canceled,
+                status: VaccineRegistrationStatus.Canceled,
             },
         );
 
         return registration
-            ? res.json(registration.toJSON()).end()
+            ? res.json(registration.toObject()).end()
             : routeErrorHandler.notFound(res);
     } catch (error) {
         console.error(error);

@@ -10,6 +10,8 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Science
+import androidx.compose.material.icons.filled.Vaccines
+import androidx.compose.material.icons.filled.Verified
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,10 +42,12 @@ import it.app.telehealth.ui.viewmodels.AuthorizationViewModel
 import it.app.telehealth.ui.viewmodels.CovidTestResultViewModel
 import it.app.telehealth.ui.viewmodels.ProfileViewModel
 import it.app.telehealth.ui.viewmodels.SymptomViewModel
+import it.app.telehealth.ui.viewmodels.VaccinationHistoryViewModel
+import it.app.telehealth.ui.viewmodels.VaccinationRegistrationListViewModel
 
 sealed class NavigationScreen(
     val route: String,
-    val title: Int,
+    var title: Int,
     val icon: ImageVector,
 ) {
     data object HomeScreen : NavigationScreen(
@@ -68,6 +72,24 @@ sealed class NavigationScreen(
         route = "covid_test_result_screen",
         title = R.string.covid_test_results_screen,
         icon = Icons.Default.Science
+    )
+
+    data object VaccinationHistory : NavigationScreen(
+        route = "vaccination_history_screen",
+        title = R.string.vaccination_history_screen,
+        icon = Icons.Default.Verified
+    )
+
+    data object VaccinationRegistrationListScreen : NavigationScreen(
+        route = "vaccination_registration_list_screen",
+        title = R.string.vaccine_regis_list_screen,
+        icon = Icons.Default.Vaccines
+    )
+
+    data object VaccinationRegistrationAddScreen : NavigationScreen(
+        route = "vaccination_registration_add_screen",
+        title = R.string.vaccine_regis_add_screen,
+        icon = Icons.Default.Vaccines
     )
 
     data object ProfileScreen : NavigationScreen(
@@ -96,6 +118,8 @@ fun AppScaffold(
     val symptomViewModel: SymptomViewModel = viewModel()
     val profileViewModel: ProfileViewModel = viewModel()
     val covidTestResultViewModel: CovidTestResultViewModel = viewModel()
+    val vaccinationHistoryViewModel: VaccinationHistoryViewModel = viewModel()
+    val vaccinationRegistrationListViewModel: VaccinationRegistrationListViewModel = viewModel()
 
     Scaffold(
         topBar = {
@@ -177,7 +201,35 @@ fun AppScaffold(
                 }
                 currentScreen = NavigationScreen.CovidTestResultScreen
             }
-
+            composable(NavigationScreen.VaccinationHistory.route) {
+                VaccinationHistoryScreen(
+                    vaccinationHistoryViewModel = vaccinationHistoryViewModel,
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    topAppBarActions = it
+                }
+                currentScreen = NavigationScreen.VaccinationHistory
+            }
+            composable(NavigationScreen.VaccinationRegistrationListScreen.route) {
+                VaccinationRegistrationListScreen(
+                    vaccinationRegistrationListViewModel = vaccinationRegistrationListViewModel,
+                    navigationController = navController,
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    topAppBarActions = it
+                }
+                currentScreen = NavigationScreen.VaccinationRegistrationListScreen
+            }
+            composable(NavigationScreen.VaccinationRegistrationAddScreen.route) {
+                VaccinationRegistrationAddScreen(
+                    vaccinationRegistrationListViewModel = vaccinationRegistrationListViewModel,
+                    navController = navController,
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    topAppBarActions = it
+                }
+                currentScreen = NavigationScreen.VaccinationRegistrationAddScreen
+            }
             composable(NavigationScreen.ProfileScreen.route) {
                 ProfileScreen(
                     profileViewModel,
