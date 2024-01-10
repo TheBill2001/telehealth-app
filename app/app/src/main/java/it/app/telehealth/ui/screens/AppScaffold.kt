@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Science
+import androidx.compose.material.icons.filled.Verified
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -40,6 +41,7 @@ import it.app.telehealth.ui.viewmodels.AuthorizationViewModel
 import it.app.telehealth.ui.viewmodels.CovidTestResultViewModel
 import it.app.telehealth.ui.viewmodels.ProfileViewModel
 import it.app.telehealth.ui.viewmodels.SymptomViewModel
+import it.app.telehealth.ui.viewmodels.VaccinationHistoryViewModel
 
 sealed class NavigationScreen(
     val route: String,
@@ -70,6 +72,12 @@ sealed class NavigationScreen(
         icon = Icons.Default.Science
     )
 
+    data object VaccinationHistory : NavigationScreen (
+        route = "vaccination_history_screen",
+        title = R.string.vaccination_history_screen,
+        icon = Icons.Default.Verified
+    )
+
     data object ProfileScreen : NavigationScreen(
         route = "Profile_screen",
         title = R.string.profile_screen,
@@ -96,6 +104,7 @@ fun AppScaffold(
     val symptomViewModel: SymptomViewModel = viewModel()
     val profileViewModel: ProfileViewModel = viewModel()
     val covidTestResultViewModel: CovidTestResultViewModel = viewModel()
+    val vaccinationHistoryViewModel: VaccinationHistoryViewModel = viewModel()
 
     Scaffold(
         topBar = {
@@ -177,7 +186,15 @@ fun AppScaffold(
                 }
                 currentScreen = NavigationScreen.CovidTestResultScreen
             }
-
+            composable(NavigationScreen.VaccinationHistory.route) {
+                VaccinationHistoryScreen(
+                    vaccinationHistoryViewModel = vaccinationHistoryViewModel,
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    topAppBarActions = it
+                }
+                currentScreen = NavigationScreen.VaccinationHistory
+            }
             composable(NavigationScreen.ProfileScreen.route) {
                 ProfileScreen(
                     profileViewModel,

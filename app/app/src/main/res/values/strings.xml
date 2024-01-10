@@ -65,4 +65,10 @@
     <string name="add_test">Add new self test result</string>
     <string name="add_test_question">Is the result positive?</string>
     <string name="note">Note</string>
+    <string name="vaccination_history_screen">Vaccination history</string>
+    <string name="refresh">Refresh</string>
+    <string name="vaccine_congrat">Congratulation! You\'re vaccinated.</string>
+    <string name="vaccine_shame">You are not vaccinated!</string>
+    <string name="vaccine_name">Vaccine: %1$s</string>
+    <string name="vaccine_type">Type: %1$s</string>
 </resources>

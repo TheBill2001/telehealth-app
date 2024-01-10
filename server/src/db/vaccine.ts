@@ -18,7 +18,6 @@ const vaccineHistorySchema = new database.Schema<IVaccineHistory>({
         required: true,
         type: database.Schema.Types.ObjectId,
         ref: "User",
-        unique: true,
     },
     name: {
         type: String,

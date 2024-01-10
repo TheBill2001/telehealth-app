@@ -86,7 +86,7 @@ fun CovidTestResultScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Refresh,
-                        contentDescription = stringResource(id = R.string.add)
+                        contentDescription = stringResource(id = R.string.refresh)
                     )
                 }
             }
