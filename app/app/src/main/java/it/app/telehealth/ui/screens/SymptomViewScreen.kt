@@ -209,6 +209,11 @@ fun SymptomViewScreen(
             )
 
             Row {
+                Text(
+                    text = stringResource(id = R.string.severity_label), modifier = Modifier
+                        .align(Alignment.CenterVertically)
+                )
+
                 Slider(
                     value = if (mode == SymptomViewScreenMode.View) symptom?.severity
                         ?: 5.0f else severity,
@@ -222,7 +227,7 @@ fun SymptomViewScreen(
                 Text(
                     text = "%.1f".format(if (mode == SymptomViewScreenMode.View) symptom?.severity else severity),
                     modifier = Modifier
-                        .width(50.dp)
+                        .width(40.dp)
                         .align(Alignment.CenterVertically)
                 )
             }
