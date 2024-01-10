@@ -87,7 +87,9 @@ fun HomeScreen(
             TopAppBarActions {
                 IconButton(
                     onClick = {
-                        logout()
+                        authorizationViewModel.logout {
+                            logout()
+                        }
                     }
                 ) {
                     Icon(
