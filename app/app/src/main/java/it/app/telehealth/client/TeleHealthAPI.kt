@@ -6,6 +6,7 @@ import it.app.telehealth.client.services.AuthorizationService
 import it.app.telehealth.client.services.CovidTestService
 import it.app.telehealth.client.services.ProfileService
 import it.app.telehealth.client.services.SymptomService
+import it.app.telehealth.client.services.VaccinationService
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.JavaNetCookieJar
@@ -45,5 +46,9 @@ object TeleHealthAPI {
 
     val covidTestService: CovidTestService by lazy {
         retrofit.create(CovidTestService::class.java)
+    }
+
+    val vaccinationService: VaccinationService by lazy {
+        retrofit.create(VaccinationService::class.java)
     }
 }

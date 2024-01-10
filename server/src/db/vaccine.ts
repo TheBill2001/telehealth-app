@@ -45,7 +45,7 @@ export const VaccineHistory = database.model<IVaccineHistory>(
     vaccineHistorySchema,
 );
 
-export enum VaccineRegistractionStatus {
+export enum VaccineRegistrationStatus {
     Pending = "Pending",
     Canceled = "Canceled",
     Accepted = "Accepted",
@@ -56,7 +56,7 @@ export interface IVaccineRegistraction {
     userId: database.Types.ObjectId;
     name: string;
     type: VaccineType;
-    status: VaccineRegistractionStatus;
+    status: VaccineRegistrationStatus;
     facility?: string;
     date?: Date;
     createdAt?: Date;
@@ -83,8 +83,8 @@ const vaccineRegistractionSchema = new database.Schema<IVaccineRegistraction>(
         status: {
             type: String,
             required: true,
-            enum: VaccineRegistractionStatus,
-            default: VaccineRegistractionStatus.Pending,
+            enum: VaccineRegistrationStatus,
+            default: VaccineRegistrationStatus.Pending,
         },
         facility: {
             type: String,

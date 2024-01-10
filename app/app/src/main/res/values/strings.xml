@@ -64,4 +64,5 @@
     <string name="test_type_facility">Test at a facility</string>
     <string name="add_test">Add new self test result</string>
     <string name="add_test_question">Is the result positive?</string>
+    <string name="note">Note</string>
 </resources>

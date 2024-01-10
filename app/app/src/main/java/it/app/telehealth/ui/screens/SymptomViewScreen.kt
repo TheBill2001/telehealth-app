@@ -233,6 +233,7 @@ fun SymptomViewScreen(
                 onValueChange = { note = it },
                 enabled = state == SymptomViewScreenState.Idle,
                 readOnly = mode == SymptomViewScreenMode.View,
+                label = { Text(stringResource(id = R.string.note)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp, 0.dp, 10.dp),
