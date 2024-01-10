@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
@@ -108,10 +107,14 @@ fun VaccinationRegistrationListScreen(
                     )
                 ) {
                     Row(
-                        Modifier.fillMaxWidth().padding(20.dp)
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(20.dp)
                     ) {
                         Column(
-                            Modifier.fillMaxWidth().weight(1f)
+                            Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
                         ) {
                             Text(
                                 stringResource(R.string.vaccine_name, item.name)

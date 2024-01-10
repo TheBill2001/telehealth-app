@@ -8,6 +8,7 @@ import kotlinx.serialization.Serializable
 enum class VaccineType {
     @SerialName("Vaccine")
     Vaccine,
+
     @SerialName("Booster")
     Booster
 }

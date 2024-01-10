@@ -3,7 +3,6 @@ package it.app.telehealth.client.services
 import it.app.telehealth.client.models.NewVaccineRegistration
 import it.app.telehealth.client.models.VaccinationHistory
 import it.app.telehealth.client.models.VaccinationRegistration
-import it.app.telehealth.client.models.VaccineType
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST

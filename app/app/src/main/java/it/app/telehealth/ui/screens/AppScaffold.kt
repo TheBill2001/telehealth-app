@@ -33,7 +33,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -81,13 +80,13 @@ sealed class NavigationScreen(
         icon = Icons.Default.Verified
     )
 
-    data object VaccinationRegistrationListScreen: NavigationScreen(
+    data object VaccinationRegistrationListScreen : NavigationScreen(
         route = "vaccination_registration_list_screen",
         title = R.string.vaccine_regis_list_screen,
         icon = Icons.Default.Vaccines
     )
 
-    data object VaccinationRegistrationAddScreen: NavigationScreen(
+    data object VaccinationRegistrationAddScreen : NavigationScreen(
         route = "vaccination_registration_add_screen",
         title = R.string.vaccine_regis_add_screen,
         icon = Icons.Default.Vaccines
