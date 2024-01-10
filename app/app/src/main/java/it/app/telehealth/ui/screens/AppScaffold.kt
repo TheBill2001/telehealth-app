@@ -45,7 +45,7 @@ import it.app.telehealth.ui.viewmodels.VaccinationHistoryViewModel
 
 sealed class NavigationScreen(
     val route: String,
-    val title: Int,
+    var title: Int,
     val icon: ImageVector,
 ) {
     data object HomeScreen : NavigationScreen(

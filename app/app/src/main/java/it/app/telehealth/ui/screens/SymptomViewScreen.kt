@@ -83,13 +83,6 @@ fun SymptomViewScreen(
         }
     }
 
-    LaunchedEffect(id) {
-        if (id != null)
-            reUpdate()
-        else
-            mode = SymptomViewScreenMode.Edit
-    }
-
     LaunchedEffect(true) {
         onComposing(
             TopAppBarActions {
@@ -161,8 +154,15 @@ fun SymptomViewScreen(
                     )
                 }
             }
-
         )
+
+        if (id != null) {
+            reUpdate()
+            NavigationScreen.SymptomEditScreen.title = R.string.symptom_edit_screen
+        } else {
+            NavigationScreen.SymptomEditScreen.title = R.string.symptom_add_screen
+            mode = SymptomViewScreenMode.Edit
+        }
     }
 
     Surface(
