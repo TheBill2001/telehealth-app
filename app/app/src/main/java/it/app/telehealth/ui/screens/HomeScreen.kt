@@ -143,7 +143,8 @@ fun HomeScreen(
                         NavigationScreen.SymptomScreen,
                         NavigationScreen.CovidTestResultScreen,
                         NavigationScreen.VaccinationHistory,
-                        NavigationScreen.ProfileScreen,
+                        NavigationScreen.VaccinationRegistrationListScreen,
+                        NavigationScreen.ProfileScreen
                     )
                 ) { screen ->
                     ElevatedCard(

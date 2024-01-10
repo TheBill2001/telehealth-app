@@ -73,4 +73,10 @@
     <string name="vaccine_name">Vaccine: %1$s</string>
     <string name="vaccine_type">Type: %1$s</string>
     <string name="severity_label">Severity</string>
+    <string name="vaccine_regis_list_screen">Vaccination registrations</string>
+    <string name="vaccine_regis_status">Status: %1$s</string>
+    <string name="vaccine_regis_add_screen">Register for vaccination</string>
+    <string name="vaccine_label">Vaccine</string>
+    <string name="facility_label">Facility</string>
+    <string name="vaccine_type_label">Type</string>
 </resources>

@@ -20,6 +20,13 @@ enum class VaccineRegistrationStatus {
 }
 
 @Serializable
+data class NewVaccineRegistration(
+    val name: String,
+    val type: VaccineType,
+    val facility: String,
+)
+
+@Serializable
 data class VaccinationRegistration(
     @SerialName("_id")
     val id: String,
@@ -27,7 +34,7 @@ data class VaccinationRegistration(
     val name: String,
     val type: VaccineType,
     val status: VaccineRegistrationStatus,
-    val facility: String? = null,
+    val facility: String,
     val date: Instant? = null,
     val createdAt: Instant? = null,
     val updatedAt: Instant? = null,

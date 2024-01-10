@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Science
+import androidx.compose.material.icons.filled.Vaccines
 import androidx.compose.material.icons.filled.Verified
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -32,6 +33,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -42,6 +44,7 @@ import it.app.telehealth.ui.viewmodels.CovidTestResultViewModel
 import it.app.telehealth.ui.viewmodels.ProfileViewModel
 import it.app.telehealth.ui.viewmodels.SymptomViewModel
 import it.app.telehealth.ui.viewmodels.VaccinationHistoryViewModel
+import it.app.telehealth.ui.viewmodels.VaccinationRegistrationListViewModel
 
 sealed class NavigationScreen(
     val route: String,
@@ -78,6 +81,18 @@ sealed class NavigationScreen(
         icon = Icons.Default.Verified
     )
 
+    data object VaccinationRegistrationListScreen: NavigationScreen(
+        route = "vaccination_registration_list_screen",
+        title = R.string.vaccine_regis_list_screen,
+        icon = Icons.Default.Vaccines
+    )
+
+    data object VaccinationRegistrationAddScreen: NavigationScreen(
+        route = "vaccination_registration_add_screen",
+        title = R.string.vaccine_regis_add_screen,
+        icon = Icons.Default.Vaccines
+    )
+
     data object ProfileScreen : NavigationScreen(
         route = "Profile_screen",
         title = R.string.profile_screen,
@@ -105,6 +120,7 @@ fun AppScaffold(
     val profileViewModel: ProfileViewModel = viewModel()
     val covidTestResultViewModel: CovidTestResultViewModel = viewModel()
     val vaccinationHistoryViewModel: VaccinationHistoryViewModel = viewModel()
+    val vaccinationRegistrationListViewModel: VaccinationRegistrationListViewModel = viewModel()
 
     Scaffold(
         topBar = {
@@ -194,6 +210,26 @@ fun AppScaffold(
                     topAppBarActions = it
                 }
                 currentScreen = NavigationScreen.VaccinationHistory
+            }
+            composable(NavigationScreen.VaccinationRegistrationListScreen.route) {
+                VaccinationRegistrationListScreen(
+                    vaccinationRegistrationListViewModel = vaccinationRegistrationListViewModel,
+                    navigationController = navController,
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    topAppBarActions = it
+                }
+                currentScreen = NavigationScreen.VaccinationRegistrationListScreen
+            }
+            composable(NavigationScreen.VaccinationRegistrationAddScreen.route) {
+                VaccinationRegistrationAddScreen(
+                    vaccinationRegistrationListViewModel = vaccinationRegistrationListViewModel,
+                    navController = navController,
+                    modifier = Modifier.padding(innerPadding)
+                ) {
+                    topAppBarActions = it
+                }
+                currentScreen = NavigationScreen.VaccinationRegistrationAddScreen
             }
             composable(NavigationScreen.ProfileScreen.route) {
                 ProfileScreen(

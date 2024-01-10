@@ -56,7 +56,7 @@ export interface IVaccineRegistraction {
     name: string;
     type: VaccineType;
     status: VaccineRegistrationStatus;
-    facility?: string;
+    facility: string;
     date?: Date;
     createdAt?: Date;
     updatedAt?: Date;
@@ -68,7 +68,6 @@ const vaccineRegistractionSchema = new database.Schema<IVaccineRegistraction>(
             required: true,
             type: database.Schema.Types.ObjectId,
             ref: "User",
-            unique: true,
         },
         name: {
             type: String,
@@ -87,7 +86,7 @@ const vaccineRegistractionSchema = new database.Schema<IVaccineRegistraction>(
         },
         facility: {
             type: String,
-            required: false,
+            required: true,
         },
         date: {
             type: Date,

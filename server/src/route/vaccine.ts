@@ -50,11 +50,11 @@ router.get("/registration", async (req, res) => {
     try {
         const registration = await VaccineRegistraction.find({
             userId,
-            date: {
+            createdAt: {
                 $gte: fromQuery,
                 $lte: toQuery,
             },
-        }).sort({ date: descQuery });
+        }).sort({ createdAt: descQuery });
 
         return res.json(registration.map((item) => item.toObject())).end();
     } catch (error) {
@@ -70,13 +70,14 @@ router.post("/registration", async (req, res) => {
     if (!routeErrorHandler.unsupportedMediaType(req, res, "application/json"))
         return;
 
-    const { name, type } = req.body;
+    const { name, type, facility } = req.body;
 
     try {
         const registration = await VaccineRegistraction.create({
             userId,
             name,
             type,
+            facility,
         });
 
         return res.json(registration.toObject()).end();

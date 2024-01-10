@@ -1,7 +1,10 @@
 package it.app.telehealth.client.services
 
+import it.app.telehealth.client.models.NewVaccineRegistration
 import it.app.telehealth.client.models.VaccinationHistory
 import it.app.telehealth.client.models.VaccinationRegistration
+import it.app.telehealth.client.models.VaccineType
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -15,7 +18,7 @@ interface VaccinationService {
     suspend fun getVaccineRegistration(): List<VaccinationRegistration>
 
     @POST("vaccine/registration")
-    suspend fun addNewRegistration(): VaccinationRegistration
+    suspend fun addNewRegistration(@Body request: NewVaccineRegistration): VaccinationRegistration
 
     @GET("vaccine/registration/{id}")
     suspend fun getRegistrationById(@Path("id") id: String): VaccinationRegistration
