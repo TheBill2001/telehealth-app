@@ -32,7 +32,7 @@ The app is written in Kotlin. The UI is contruct using Jetpack Compose with Mate
 
 ### Home screen.
 
-<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/df7d0a64-2c44-4109-9ddb-513d2919e1ad" width=400>
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/2835633b-9fa0-47c4-aded-b151d6540591" width=400>
 <img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/01cb6f39-a9c1-4711-8c5e-d4dc93fca9f7" width=400>
 
 ### Symptom tracking.
@@ -43,10 +43,10 @@ The app allow the user to track their own symptom, with a severity rating rangin
 <img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/467d6cc3-3d45-479e-99b2-fa4303ec7539" width=400>
 
 - Add new symptom description. The date and time will automatically set.
-<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/831e55a7-5e7b-4dc5-a5ca-c1b272067466" width=400>
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/a3bd75cf-da42-4479-9526-972d0cf07159" width=400>
 
 - Edit an symptom entry.
-<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/38eccc49-7e87-48dd-8084-b83d1dbde1d3" width=400>
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/befe3c3b-6f2b-46ac-a1c1-cb581d4efdb4" width=400>
 
 ### COVID test result.
 
@@ -67,4 +67,5 @@ The user can view their vaccination history. Vaccination history has two types: 
 
 The user can register with a facility for vaccination (đăng kí tiêm). Registration has 4 status: Pending, Canceled, Accepted, Finished.
 
-_Server ready. Not finish UI, yet_
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/14ebe86a-5352-4089-b0e3-c2a683bffbd0" width=400>
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/8bcf01bd-b74b-401a-973d-e14f43cb2409" width=400>
