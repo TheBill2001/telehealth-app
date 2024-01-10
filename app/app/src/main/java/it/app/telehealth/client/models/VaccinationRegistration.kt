@@ -8,10 +8,13 @@ import kotlinx.serialization.Serializable
 enum class VaccineRegistrationStatus {
     @SerialName("Pending")
     Pending,
+
     @SerialName("Canceled")
     Canceled,
+
     @SerialName("Accepted")
     Accepted,
+
     @SerialName("Finished")
     Finished,
 }

@@ -89,7 +89,9 @@ fun SymptomScreen(
     ) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 300.dp),
-            modifier = Modifier.padding(10.dp).fillMaxSize()
+            modifier = Modifier
+                .padding(10.dp)
+                .fillMaxSize()
         ) {
             if (userSymptoms != null) {
                 items(userSymptoms!!.size) { index ->

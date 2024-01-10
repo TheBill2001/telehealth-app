@@ -72,7 +72,7 @@ sealed class NavigationScreen(
         icon = Icons.Default.Science
     )
 
-    data object VaccinationHistory : NavigationScreen (
+    data object VaccinationHistory : NavigationScreen(
         route = "vaccination_history_screen",
         title = R.string.vaccination_history_screen,
         icon = Icons.Default.Verified

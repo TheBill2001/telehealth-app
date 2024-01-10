@@ -23,7 +23,7 @@ private val client: OkHttpClient = OkHttpClient.Builder()
     .connectTimeout(100, TimeUnit.SECONDS)
     .readTimeout(100, TimeUnit.SECONDS).build()
 
-private val json = Json{ ignoreUnknownKeys = true }
+private val json = Json { ignoreUnknownKeys = true }
 
 @OptIn(ExperimentalSerializationApi::class)
 private val retrofit = Retrofit.Builder().client(client)

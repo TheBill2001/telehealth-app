@@ -1,7 +1,6 @@
 package it.app.telehealth.ui.screens
 
 import android.text.format.DateFormat
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,20 +18,16 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Error
 import androidx.compose.material.icons.filled.Refresh
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -95,7 +90,7 @@ fun CovidTestResultScreen(
     }
 
     if (openAddDialog.value) {
-        Dialog(onDismissRequest = {openAddDialog.value = false}) {
+        Dialog(onDismissRequest = { openAddDialog.value = false }) {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -110,16 +105,23 @@ fun CovidTestResultScreen(
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     val checked = remember { mutableStateOf(false) }
-                    
+
                     Text(
                         text = stringResource(R.string.add_test),
                         modifier = Modifier.padding(16.dp),
                         fontWeight = FontWeight.Bold
                     )
-                
-                    Row (modifier = Modifier.padding(16.dp)) {
-                        Text(text = stringResource(id = R.string.add_test_question), modifier = Modifier.align(Alignment.CenterVertically))
-                        Checkbox(checked = checked.value, onCheckedChange =  {checked.value = it}, modifier = Modifier.align(Alignment.CenterVertically))
+
+                    Row(modifier = Modifier.padding(16.dp)) {
+                        Text(
+                            text = stringResource(id = R.string.add_test_question),
+                            modifier = Modifier.align(Alignment.CenterVertically)
+                        )
+                        Checkbox(
+                            checked = checked.value,
+                            onCheckedChange = { checked.value = it },
+                            modifier = Modifier.align(Alignment.CenterVertically)
+                        )
                     }
 
                     Row(
