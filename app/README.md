@@ -21,6 +21,17 @@ The app is written in Kotlin. The UI is contruct using Jetpack Compose with Mate
 
 ## Functionalities
 
+### Login.
+
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/17fb1c5d-126f-4645-81b8-60bdaae9bdb3" width=400>
+
+### Register.
+
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/a044c932-0025-48c2-898d-a0397288fee1" width=400>
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/80199234-95b7-40a6-b750-2113e9d1e3fc" width=400>
+
+### Home screen.
+
 <img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/df7d0a64-2c44-4109-9ddb-513d2919e1ad" width=400>
 <img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/01cb6f39-a9c1-4711-8c5e-d4dc93fca9f7" width=400>
 
@@ -48,16 +59,12 @@ The user can view their COVID test results from a testing facility and submit th
 
 The user can view their vaccination history. Vaccination history has two types: (normal) vaccine and booster.
 
-_Server ready. Not finish UI, yet_
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/ca99628d-4bb8-4cc2-bd44-635de96752b8" width=400>
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/c824bbe6-8609-4b2b-9148-684e2d8f1f05" width=400>
+<img src="https://github.com/TheBill2001/telehealth-app/assets/68230358/b28298d2-39de-4f51-8271-46868d084f2e" width=400>
 
 ## Vaccination registration.
 
 The user can register with a facility for vaccination (đăng kí tiêm). Registration has 4 status: Pending, Canceled, Accepted, Finished.
 
 _Server ready. Not finish UI, yet_
-
-## Remote medical guidance.
-
-**CANCLED - NOT IMPLEMENTED - TECHNICAL DIFICULTIES - NOT ENOUGH KNOWLEDGE**
-
-The user can use text and video chat for remote medical advice/guidance.
