@@ -455,7 +455,7 @@ fun usernameValidation(u: String): Boolean {
  * Regex is a pain.
  */
 fun passwordValidation(p: String): Boolean {
-    return p.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@\$%^&(){}\\[\\]:;<>,?/~_+-=|\\\\]).{8,32}\$".toRegex()) // No touchy
+    return p.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[*.!@\$%^&(){}\\[\\]:;<>,?/~_+\\-=|\\\\]).{8,32}\$".toRegex()) // No touchy
 }
 
 fun passwordValidation1(p: String): Boolean {
@@ -471,7 +471,7 @@ fun passwordValidation3(p: String): Boolean {
 }
 
 fun passwordValidation4(p: String): Boolean {
-    return p.contains("[*.!@\$%^&(){}\\[\\]:;<>,?/~_+-=|\\\\]".toRegex())
+    return p.contains("[*.!@\$%^&(){}\\[\\]:;<>,?/~_+\\-=|\\\\]".toRegex())
 }
 
 fun passwordValidation5(p: String): Boolean {
