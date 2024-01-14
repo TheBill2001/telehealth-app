@@ -14,5 +14,5 @@ interface AuthorizationService {
 
     @Headers("Accept: application/json")
     @POST("auth/register")
-    suspend fun register(@Body request: RegisterRequest): GenericResponse?
+    suspend fun register(@Body request: RegisterRequest)
 }
